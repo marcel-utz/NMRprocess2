@@ -1,0 +1,62 @@
+# Sat Feb 13 12:28:19 2016
+#$$PROBEID=35
+#$$PROBEINFO=10 mm MICWB40 13C-1H XYZ-GRD T139480/0010
+#$$PICSINFO=T139480_0010_35.par
+#$$SHIMID=312532
+#
+# Active Shim Gradients
+#
+Z           		-26957          
+Z2          		15118           
+Z3          		-33404          
+Z4          		0               
+Z5          		275             
+X           		12036           
+XZ          		0               
+XZ2         		-12000          
+Y           		-10643          
+YZ          		48000           
+YZ2         		-59000          
+XY          		8690            
+XYZ         		0               
+(X2-Y2)     		1400            
+(X2-Y2)Z    		0               
+X3          		0               
+Y3          		-200            
+#
+# Lock Parameter
+#
+FIELD		-1097.000
+LOCKPHASE		180.000 
+LOCKPOWER		-20.000 
+LOCKGAIN		120.000 
+LOCKDC		-75.000 
+LOCKSHIFT		7.240   
+LOOPGAIN		-12.000 
+LOOPTIME		0.400   
+LOOPFILTER		100.000 
+#
+IEEE64_VERSION_CODE 1
+#
+# Shim currents 
+#
+SHIM_SETTING [1 ]  -13074.14500002 
+SHIM_SETTING [2 ]  7483.41000000   
+SHIM_SETTING [3 ]  -17570.50400001 
+SHIM_SETTING [4 ]  -0.00000000     
+SHIM_SETTING [5 ]  144.65000000    
+SHIM_SETTING [6 ]  6330.93600000   
+SHIM_SETTING [7 ]  -0.00000000     
+SHIM_SETTING [8 ]  -6312.00000000  
+SHIM_SETTING [9 ]  736.40000000    
+SHIM_SETTING [10]  4570.94000000   
+SHIM_SETTING [11]  -5598.21800000  
+SHIM_SETTING [12]  25248.00000000  
+SHIM_SETTING [13]  -31034.00000000 
+SHIM_SETTING [14]  0.00000000      
+SHIM_SETTING [15]  0.00000000      
+SHIM_SETTING [16]  -0.00000000     
+SHIM_SETTING [17]  0.00000000      
+SHIM_SETTING [18]  -0.00000000     
+SHIM_SETTING [19]  0.00000000      
+SHIM_SETTING [20]  -105.20000000   

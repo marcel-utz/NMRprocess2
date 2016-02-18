@@ -1,0 +1,29 @@
+\documentclass[a4paper]{standalone}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.8}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\begin{axis}[
+     colorbar,
+     xlabel = $x$
+     , ylabel = $y$
+    , domain = 1:2
+     , y domain = 74:87.9
+    , view = {0}{90},
+    ]
+
+    \addplot3[
+        contour gnuplot={number = 30,labels={false}}, 
+            thick,
+            samples=40,
+        ]
+        {-2.051^3*1000./(2*3.1415*(2.99*10^2)^2)/(x^2*cos(y)^2)};
+
+\end{axis}  
+\end{tikzpicture}
+\end{document}
