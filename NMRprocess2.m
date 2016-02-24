@@ -21,7 +21,7 @@
 
 BeginPackage["NMRProcess2`"];
 
-NMRprocess::VersionNumber="2.0.0";
+NMRprocess::VersionNumber="2.0.0 " <> DateString[];
 
 Print["NMR Processing
 Version ", NMRprocess::VersionNumber, "
@@ -44,7 +44,7 @@ ReadBruker[fname_, OptionsPattern[{ByteOrdering->-1,NumberFormat->"Integer32"}]]
 		fid=BinaryReadList[fname,OptionValue[NumberFormat],ByteOrdering->OptionValue[ByteOrdering]];
 		l=Length[fid];
 		fidcomplex=1.0fid[[1;;l;;2]] - 1.0 I fid[[2;;l;;2]] ;
-		FID[<|Dim->1,data->fidcomplex|>] 
+		FID[<|Dim->1,data->fidcomplex,Points->l/2|>] 
 ];
 
 
@@ -59,11 +59,30 @@ SetTimeDomain[FID[q_],TD_List]:=
 ] 
 
 
-SetProp[FID[q_],key_,value_] := 
+SetProp[FID[q_],key_->value_] := 
 	Module[{qnew=q},
 	qnew[key]=value;
 	FID[qnew]
-]; 
+];
+
+SetProp[F_FID, R_List] :=
+	Module[{},
+	Do[F=SetProp[F,next],{next,R}];
+	F
+];
+
+
+ExtractTransient[FID[q_], n_List]:=Module[
+	{qnew= <|Dim->1|>, selector= Join[n,{;;}]/.List->Sequence },
+
+	qnew[data] = q[data][[selector]];
+	qnew[Points] = Length[qnew[data]];
+	qnew[Offset] = q[Offset][[1]];
+	qnew[SpectralWidth] = q[SpectralWidth][[1]];
+	FID[qnew]	
+];
+
+	 
 
 
 FourierShift[data_?ListQ]:=
@@ -97,22 +116,49 @@ OptionValue[Output][[1]]s+OptionValue[Output][[2]] f[Range[1,n]]
 
 
 
+FFT1D[FID[q_],OptionsPattern[{SI->1024,Phase0->Automatic,Phase1->0,Pivot->0,LeftShift->67,Apod->0.5}]]:= Module[
+	{qnew=q,fid=q[data],apod,n,sf,pc1,pivot,si=OptionValue[SI],ls=OptionValue[LeftShift],p0=0,p1=0},
+
+	If[q[Dim]!= 1, Throw["FFT1D::Can only process 1D Data"]];
+
+	If[OptionValue[Phase0]===Automatic, 
+		p0=Arg[fid[[ls+1]]],
+		p0=\[Pi] OptionValue[Phase0]/180;
+	];
+
+	(* 1st order PC is measured in Degrees/SpectralWidth *)
+	p1=\[Pi] OptionValue[Phase1]/180;
+	pivot=si/2;
+	
+	apod=Table[Exp[-OptionValue[Apod]\[Pi] k / si],{k,1,si}]; 
+	pc1=Table[Exp[I p1 (k-pivot)/si],{k,1,si}];
+
+	sf = Reverse@BaseLineCorrect[FourierShift@Re[pc1*Fourier[apod*PadRight[Drop[fid,ls],si]] Exp[I p0]],Regions->32];
+	qnew[spectrum]=sf;
+	qnew[SpectSize]=si;
+
+	FID[qnew]
+]
+
+
+
 
 StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftShift->67}]] := Module[
 	{qnew=q,
 		sf2,sfa,sfb,si2=OptionValue[SI2],si1=OptionValue[SI1],
-		p2=OptionValue[Phase2],p1=OptionValue[Phase1],
+		p2=\[Pi] OptionValue[Phase2]/180,p1=\[Pi] OptionValue[Phase1]/180,
 		ls=OptionValue[LeftShift],ser=q[data],apod2,apod1,n,m},
 
 	{n,m}=Dimensions[ser];
 	ser[[;;,1]] *= 0.5;
-	apod2=Table[Cos[\[Pi]/2 k / si2],{k,1,si2}]; 
-	sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],Regions->32],{fid,ser}];
+	apod2=PadRight[Table[0.5+0.5 Cos[\[Pi] k / m],{k,1,m}],si2]; 
+	(* sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],Regions\[Rule]32],{fid,ser}];*)
+	sf2=Table[Reverse@FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],{fid,ser}];
 	sfa = Transpose[sf2[[1;; ;;2]] - I sf2[[2;; ;;2]]] ;
 	
 	sfa[[;;,1]]*=0.5;
 	
-	apod1= PadRight[Table[Cos[\[Pi] k / n],{k,1,n/2}],si1]; 
+	apod1= PadRight[Table[0.5+0.5 Cos[2 \[Pi] k / n],{k,1,n/2}],si1]; 
 	sfb = Table[Reverse@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}];
 
 	qnew[spectrum]=Transpose[sfb];
@@ -121,6 +167,33 @@ StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftS
 	FID[qnew]
 	
 ]
+
+
+Covariance2D[FID[q_],OptionsPattern[{SI2->1024,Phase2->0,LeftShift->67}]] :=
+	Module[{qnew=q,
+		sf2,sfa,covm,si2=OptionValue[SI2],
+		p2=OptionValue[Phase2],
+		ls=OptionValue[LeftShift],ser=q[data],apod2,apod1,n,m},
+
+	(* FT in the acquired domain *)
+	
+	ser[[;;,1]] *= 0.5;
+	apod2=Table[Cos[\[Pi]/2 k / si2],{k,1,si2}]; 
+	sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],Regions->32],{fid,ser}];
+	
+	(* sfa will contain \[Omega]2 traces in its rows *)
+	sfa = sf2 ;
+
+	(* Covariance Matrix *)
+	covm = Transpose[sfa].sfa - Transpose[{Total[sfa,{1}]}]. {Total[sfa,{1}]};
+
+	qnew[spectrum]=MatrixPower[covm,1/2];
+	qnew[SpectSize]={OptionValue[SI2],OptionValue[SI2]};
+
+	FID[qnew]
+
+]
+	
 
 
 (* frq is a List of coordinates. First dimension is that of the data set (1D,2D,3D, etc).
@@ -255,7 +328,7 @@ PlotNMR1D[FID[q_],opt:OptionsPattern[Options[ListLinePlot]]]:=
 SetAttributes[PlotNMR1D,{Listable}] ;
 
 
-NMRContourPlot[FID[q_],opt:OptionsPattern[Options[ListContourPlot]] ]:= 
+NMRContourPlot[FID[q_],opt:OptionsPattern[Join[Options[ListContourPlot],{Gain->1}]] ]:= 
 	Module[{},
 
 		If[q[Dim]!= 2,Throw["NMRContourPlot::Not a 2D spectrum"]];
@@ -264,7 +337,7 @@ NMRContourPlot[FID[q_],opt:OptionsPattern[Options[ListContourPlot]] ]:=
 			DataRange->-q[SpectralWidth] {{-1/2,1/2},{-1/2,1/2}} - q[Offset] ,
 			Evaluate@FilterRules[{opt},Options[ListContourPlot]],
 			PlotRange -> Join[-q[SpectralWidth] {{-1/2,1/2},{-1/2,1/2}} - q[Offset],{All}] ,
-			Contours->Max[q[spectrum]] Range[0.1,0.9,0.1],
+			Contours-> 1./OptionValue[Gain] Max[q[spectrum]] Range[0.1,0.9,0.1],
 			ContourShading->None,
 			MaxPlotPoints->Automatic,
 			PerformanceGoal->"Precision",
@@ -292,14 +365,14 @@ Project[FID[q_],{n_Integer},OptionsPattern[{Method->Total}]] :=
 
 
 NMRContourProjectionPlot[FID[q_],opt:OptionsPattern[Join[Options[ListContourPlot],
-			{ProjectionStyle->{AbsoluteThickness[0.5],Gray}}]] ]:= 
+			{ProjectionStyle->{AbsoluteThickness[0.5],Gray},Gain->1}]] ]:= 
 	Module[{padl=10,padr=50,padb=50,padt=2,contours,proj1,proj2},
 	
 	If[q[Dim]!=2,Throw["NMRContourProjectionPlot::Dimension mismatch"]];
 
 	contours = NMRContourPlot[FID[q],
 			ImagePadding->{{padl,padr},{padb,padt}},
-			ImageSize->200+padl+padr, Evaluate@FilterRules[{opt},Options[ListContourPlot]] ] ;
+			ImageSize->200+padl+padr, Evaluate@FilterRules[{opt},Join[Options[ListContourPlot],{Gain}]]] ;
 
 	proj1 = PlotNMR1D[Project[FID[q],{1}],
 			PlotRange->All,

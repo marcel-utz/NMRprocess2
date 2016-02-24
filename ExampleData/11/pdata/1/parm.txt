@@ -1,0 +1,40 @@
+
+Current Data Parameters
+NAME        glucose-329              
+EXPNO                11              
+PROCNO                1              
+
+F2 - Acquisition Parameters
+Date_          20160222              
+Time              14.55              
+INSTRUM           spect              
+PROBHD   10 mm MICWB40               
+PULPROG              zg              
+TD                32768              
+SOLVENT            C6D6              
+NS                    1              
+DS                    0              
+SWH            6009.615 Hz           
+FIDRES         0.183399 Hz           
+AQ            2.7262976 sec          
+RG                 20.2              
+DW               83.200 usec         
+DE                40.00 usec         
+TE                300.0 K            
+D1       0 sec          
+TD0                   1              
+
+======== CHANNEL f1 ========
+SFO1        299.8308995 MHz          
+NUC1                 1H              
+P1                 4.60 usec         
+PLW1        10.00000000 W            
+
+F2 - Processing parameters
+SI                13824              
+SF          299.8314541 MHz          
+WDW                  no              
+SSB      0              
+LB       0 Hz           
+GB       0              
+PC                 1.00              
