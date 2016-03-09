@@ -1,0 +1,210 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.2
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= ogj
+$$ /opt/pv51/data/graeme/nmr/glucose-362-mu/899/audita.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2016-03-07 09:14:00.844 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 1 4>)
+(   2,<2016-03-07 09:14:08.627 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 2 4>)
+(   3,<2016-03-07 09:14:16.255 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 3 4>)
+(   4,<2016-03-07 09:14:23.925 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 4 4>)
+(   5,<2016-03-07 09:14:31.606 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 5 4>)
+(   6,<2016-03-07 09:14:39.238 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 6 4>)
+(   7,<2016-03-07 09:14:46.867 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 7 4>)
+(   8,<2016-03-07 09:14:54.535 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 8 4>)
+(   9,<2016-03-07 09:15:02.161 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 9 4>)
+(  10,<2016-03-07 09:15:09.822 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 10 4>)
+(  11,<2016-03-07 09:15:17.454 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 11 4>)
+(  12,<2016-03-07 09:15:25.083 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 12 4>)
+(  13,<2016-03-07 09:15:32.736 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 13 4>)
+(  14,<2016-03-07 09:15:40.359 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 14 4>)
+(  15,<2016-03-07 09:15:48.043 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 15 4>)
+(  16,<2016-03-07 09:15:55.737 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 16 4>)
+(  17,<2016-03-07 09:16:03.371 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 17 4>)
+(  18,<2016-03-07 09:16:11.063 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 18 4>)
+(  19,<2016-03-07 09:16:18.732 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 19 4>)
+(  20,<2016-03-07 09:16:26.366 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 20 4>)
+(  21,<2016-03-07 09:16:34.046 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 21 4>)
+(  22,<2016-03-07 09:16:41.710 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 22 4>)
+(  23,<2016-03-07 09:16:49.326 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 23 4>)
+(  24,<2016-03-07 09:16:56.977 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 24 4>)
+(  25,<2016-03-07 09:17:04.591 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 25 4>)
+(  26,<2016-03-07 09:17:12.214 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 26 4>)
+(  27,<2016-03-07 09:17:19.900 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 27 4>)
+(  28,<2016-03-07 09:17:27.538 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 28 4>)
+(  29,<2016-03-07 09:17:35.200 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 29 4>)
+(  30,<2016-03-07 09:17:42.867 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 30 4>)
+(  31,<2016-03-07 09:17:50.499 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 31 4>)
+(  32,<2016-03-07 09:17:58.144 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 32 4>)
+(  33,<2016-03-07 09:18:05.782 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 33 4>)
+(  34,<2016-03-07 09:18:13.465 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 34 4>)
+(  35,<2016-03-07 09:18:21.111 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 35 4>)
+(  36,<2016-03-07 09:18:28.773 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 36 4>)
+(  37,<2016-03-07 09:18:36.428 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 37 4>)
+(  38,<2016-03-07 09:18:44.113 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 38 4>)
+(  39,<2016-03-07 09:18:51.759 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 39 4>)
+(  40,<2016-03-07 09:18:59.370 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 40 4>)
+(  41,<2016-03-07 09:19:07.036 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 41 4>)
+(  42,<2016-03-07 09:19:14.699 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 42 4>)
+(  43,<2016-03-07 09:19:22.326 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 43 4>)
+(  44,<2016-03-07 09:19:29.994 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 44 4>)
+(  45,<2016-03-07 09:19:37.650 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 45 4>)
+(  46,<2016-03-07 09:19:45.292 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 46 4>)
+(  47,<2016-03-07 09:19:52.929 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 47 4>)
+(  48,<2016-03-07 09:20:00.596 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 48 4>)
+(  49,<2016-03-07 09:20:08.228 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 49 4>)
+(  50,<2016-03-07 09:20:15.937 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 50 4>)
+(  51,<2016-03-07 09:20:23.553 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 51 4>)
+(  52,<2016-03-07 09:20:31.239 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 52 4>)
+(  53,<2016-03-07 09:20:38.905 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 53 4>)
+(  54,<2016-03-07 09:20:46.530 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 54 4>)
+(  55,<2016-03-07 09:20:54.162 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 55 4>)
+(  56,<2016-03-07 09:21:01.840 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 56 4>)
+(  57,<2016-03-07 09:21:09.472 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 57 4>)
+(  58,<2016-03-07 09:21:17.153 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 58 4>)
+(  59,<2016-03-07 09:21:24.842 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 59 4>)
+(  60,<2016-03-07 09:21:32.482 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 60 4>)
+(  61,<2016-03-07 09:21:40.163 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 61 4>)
+(  62,<2016-03-07 09:21:47.774 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 62 4>)
+(  63,<2016-03-07 09:21:55.396 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 63 4>)
+(  64,<2016-03-07 09:22:03.060 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 64 4>)
+(  65,<2016-03-07 09:22:10.685 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 65 4>)
+(  66,<2016-03-07 09:22:18.303 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 66 4>)
+(  67,<2016-03-07 09:22:25.977 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 67 4>)
+(  68,<2016-03-07 09:22:33.609 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 68 4>)
+(  69,<2016-03-07 09:22:41.232 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 69 4>)
+(  70,<2016-03-07 09:22:48.876 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 70 4>)
+(  71,<2016-03-07 09:22:56.516 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 71 4>)
+(  72,<2016-03-07 09:23:04.185 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 72 4>)
+(  73,<2016-03-07 09:23:11.857 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 73 4>)
+(  74,<2016-03-07 09:23:19.482 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 74 4>)
+(  75,<2016-03-07 09:23:27.158 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 75 4>)
+(  76,<2016-03-07 09:23:34.847 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 76 4>)
+(  77,<2016-03-07 09:23:42.463 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 77 4>)
+(  78,<2016-03-07 09:23:50.128 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 78 4>)
+(  79,<2016-03-07 09:23:57.781 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 79 4>)
+(  80,<2016-03-07 09:24:05.414 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 80 4>)
+(  81,<2016-03-07 09:24:13.092 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 81 4>)
+(  82,<2016-03-07 09:24:20.745 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 82 4>)
+(  83,<2016-03-07 09:24:28.385 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 83 4>)
+(  84,<2016-03-07 09:24:36.076 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 84 4>)
+(  85,<2016-03-07 09:24:43.702 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 85 4>)
+(  86,<2016-03-07 09:24:51.329 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 86 4>)
+(  87,<2016-03-07 09:24:58.982 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 87 4>)
+(  88,<2016-03-07 09:25:06.627 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 88 4>)
+(  89,<2016-03-07 09:25:14.279 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 89 4>)
+(  90,<2016-03-07 09:25:21.955 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 90 4>)
+(  91,<2016-03-07 09:25:29.590 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 91 4>)
+(  92,<2016-03-07 09:25:37.244 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 92 4>)
+(  93,<2016-03-07 09:25:44.934 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 93 4>)
+(  94,<2016-03-07 09:25:52.569 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 94 4>)
+(  95,<2016-03-07 09:26:00.249 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 95 4>)
+(  96,<2016-03-07 09:26:07.911 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 96 4>)
+(  97,<2016-03-07 09:26:15.548 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 97 4>)
+(  98,<2016-03-07 09:26:23.194 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 98 4>)
+(  99,<2016-03-07 09:26:30.832 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 99 4>)
+( 100,<2016-03-07 09:26:38.467 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<mvrow>,<TOPSPIN 3.2>,
+      <wser 100 4>)
+##END=
+
+$$ hash MD5
+$$ 2A 5B 5B 7C 0B 7C 08 B4 09 B0 03 1B D5 16 1A 77

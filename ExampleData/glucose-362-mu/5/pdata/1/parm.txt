@@ -1,0 +1,74 @@
+
+Current Data Parameters
+NAME     glucose-362-mu              
+EXPNO                 5              
+PROCNO                1              
+
+F2 - Acquisition Parameters
+Date_          20160307              
+Time              10.12              
+INSTRUM           spect              
+PROBHD   10 mm MICWB40               
+PULPROG        hsqcphpr              
+TD                 1024              
+SOLVENT            C6D6              
+NS                    8              
+DS                   16              
+SWH            3597.122 Hz           
+FIDRES         3.512815 Hz           
+AQ            0.1423360 sec          
+RG                  181              
+DW              139.000 usec         
+DE               150.00 usec         
+TE                300.0 K            
+CNST2       165.0000000              
+D0           0.00000300 sec          
+D1           2.00000000 sec          
+D4           0.00151515 sec          
+D11          0.03000000 sec          
+D12          0.00002000 sec          
+D13          0.00000400 sec          
+IN0          0.00003490 sec          
+
+======== CHANNEL f1 ========
+SFO1        299.8319983 MHz          
+NUC1                 1H              
+P1                 4.20 usec         
+P2                 8.40 usec         
+PLW1        10.00000000 W            
+PLW9         0.00000500 W            
+
+======== CHANNEL f2 ========
+SFO2         75.3846016 MHz          
+NUC2                13C              
+CPDPRG[2           garp              
+P3                36.00 usec         
+P4                72.00 usec         
+PCPD2             61.00 usec         
+PLW2        10.00000000 W            
+PLW12        3.50000000 W            
+
+F1 - Acquisition parameters
+TD                   33              
+SFO1            75.3846 MHz          
+FIDRES       434.140839 Hz           
+SW              190.047 ppm          
+FnMODE      States-TPPI              
+
+F2 - Processing parameters
+SI                 4096              
+SF          299.8306784 MHz          
+WDW               QSINE              
+SSB                   2              
+LB       0 Hz           
+GB       0              
+PC                 1.00              
+
+F1 - Processing parameters
+SI                  512              
+MC2         States-TPPI              
+SF           75.3779535 MHz          
+WDW               QSINE              
+SSB                   2              
+LB       0 Hz           
+GB       0              

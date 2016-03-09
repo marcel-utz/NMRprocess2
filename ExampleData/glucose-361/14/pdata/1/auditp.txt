@@ -1,0 +1,17 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.2
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= ogj
+$$ /opt/pv51/data/graeme/nmr/glucose-361/14/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2016-03-04 15:37:57.717 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<go>,<TOPSPIN 3.2>,
+      <acquisition in progress>)
+(   2,<2016-03-04 15:39:28.357 +0000>,<ogj>,<tor.chem.soton.ac.uk>,<proc2d>,<TOPSPIN 3.2>,
+      <Start of raw data processing
+       xfb F2: TDeff = 512 SI = 1K WDW = 4 SSB = 2 FT_mod = 6 PKNL = 1 PHC0 = -127.65 PHC1 = 0 F1: SI = 512 WDW = 4 SSB = 2 FT_mod = 4 PHC0 = -80 PHC1 = 0
+       data hash MD5: 1K * 512
+       7B 46 D0 78 80 73 37 41 A1 4B 39 B1 8F AD 98 7C>)
+##END=
+
+$$ hash MD5
+$$ 3B 5A 7D 50 F3 88 B8 22 2E 3C 43 FB 32 EE FA A3

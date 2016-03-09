@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.2
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= ogj
+$$ 2016-03-07 09:14:00.805 +0000  ogj@tor.chem.soton.ac.uk
+$$ /opt/pv51/data/graeme/nmr/glucose-362-mu/899/pdata/1/outd
+$$ process /opt/topspin3.2/prog/au/bin/poptau
+##$CURPLOT= <hplj4k>
+##$CURPRIN= <$hplj4k>
+##$DFORMAT= <normdp>
+##$LAYOUT= <+/1D_H.xwp>
+##$LFORMAT= <normlp>
+##$PFORMAT= <normpl>
+##END=

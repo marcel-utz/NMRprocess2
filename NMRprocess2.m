@@ -196,6 +196,23 @@ Covariance2D[FID[q_],OptionsPattern[{SI2->1024,Phase2->0,LeftShift->67}]] :=
 	
 
 
+CovHSQCTOCSY[FID[q_]] :=
+	Module[{qnew=q,sfa},
+
+		(* sfa will contain \[Omega]1 traces in its rows *)
+		sfa=Transpose[q[spectrum]];
+
+		(* Covariance Matrix *)
+		covm = Transpose[sfa].sfa - Transpose[{Total[sfa,{1}]}]. {Total[sfa,{1}]};
+
+		qnew[spectrum]=covm;
+		qnew[SpectSize]=Dimensions[q[spectrum]];
+		qnew[SpectralWidth]=q[SpectralWidth][[2]]{1,1};		
+
+	FID[qnew]
+]
+
+
 (* frq is a List of coordinates. First dimension is that of the data set (1D,2D,3D, etc).
    inner dimensions can be of any size; whole lists of coordinates can be processed at once
    in this way.

@@ -1,0 +1,101 @@
+# This file gives a closer overview about the occurrences of ADC overflows
+# during the last acquisition.
+# It is updated each time an FID is written to disk.
+# 'Scans' denotes the number of scans that have been acquired for the current FID buffer,
+# 'Experiment' the number of the current FID buffer 
+# (which may be >1 in case of multi dimensional acquisition),
+# 'Overflows' the total number of ADC overflows (if existing) that appeared during 'Scans'
+# scans in FID buffer 'Experiment'.
+# In case a multi-dimensional experiment is fully executed in the FID buffer of the DRU
+# (i.e. using 'st' commands) only the sum of all overflows over all experiments is displayed.
+# Note that the number of overflows may exceed the actual number of scans
+# since there may be more than one overflow per scan.
+
+
+# Scans   Experiment   Overflows
+# ------------------------------
+16   1   27
+16   2   26
+16   3   27
+16   4   28
+16   5   28
+16   6   27
+16   7   27
+16   8   27
+16   9   26
+16   10   26
+16   11   26
+16   12   26
+16   13   27
+16   14   28
+16   15   27
+16   16   27
+16   17   26
+16   18   26
+16   19   27
+16   20   26
+16   21   26
+16   22   28
+16   23   28
+16   24   27
+16   25   27
+16   26   28
+16   27   26
+16   28   28
+16   29   28
+16   30   26
+16   31   27
+16   32   27
+16   33   28
+16   34   27
+16   35   27
+16   36   27
+16   37   27
+16   38   28
+16   39   27
+16   40   27
+16   41   27
+16   42   27
+16   43   28
+16   44   28
+16   45   28
+16   46   27
+16   47   27
+16   48   27
+16   49   27
+16   50   27
+16   51   27
+16   52   27
+16   53   27
+16   54   27
+16   55   26
+16   56   26
+16   57   27
+16   58   27
+16   59   27
+16   60   27
+16   61   26
+16   62   27
+16   63   26
+16   64   27
+16   65   27
+16   66   27
+16   67   27
+16   68   27
+16   69   28
+16   70   28
+16   71   27
+16   72   28
+16   73   27
+16   74   29
+16   75   26
+16   76   28
+16   77   28
+16   78   27
+16   79   27
+16   80   28
+16   81   27
+16   82   26
+16   83   27
+16   84   27
+16   85   27
