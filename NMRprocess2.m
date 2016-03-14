@@ -21,7 +21,7 @@
 
 BeginPackage["NMRProcess2`"];
 
-NMRprocess::VersionNumber="2.0.0 " <> DateString[];
+NMRprocess::VersionNumber="2.0.0 " <> DateString[FileDate["NMRProcess2.m"]];
 
 Print["NMR Processing
 Version ", NMRprocess::VersionNumber, "
@@ -30,7 +30,7 @@ marcel.utz@southampton.ac.uk"];
 
 
 
-Format[FID[assoc_]] := "-|Fid.." <> ToString[assoc[Dim] ] <> "--"
+Format[FID[assoc_]] := "-|NMR.." <> ToString[assoc[Dim] ] <> "--"
 
 
 FID[q_][x_]:= q[x]
@@ -48,6 +48,14 @@ ReadBruker[fname_, OptionsPattern[{ByteOrdering->-1,NumberFormat->"Integer32"}]]
 ];
 
 
+
+
+AddRaw[FID[q1_],FID[q2_]] := 
+	Module[{qnew=q1},
+		qnew[data]=q1[data]+q2[data];
+		FID[qnew]
+];
+	
 
 
 SetTimeDomain[FID[q_],TD_List]:= 
@@ -112,6 +120,17 @@ data=Transpose[{baslpoints,s[[baslpoints]]}];
 f[x_]=Fit[data,Table[x^k,{k,0,order}],x];
 OptionValue[Output][[1]]s+OptionValue[Output][[2]] f[Range[1,n]]
 
+];
+
+
+
+LinPred[x_,p_,n_]:= 
+	Module[{l=Length[x],a,R,r,xnew=x,k},
+		r=Take[ListCorrelate[x,Conjugate[x],{1,1},0],p+1]/l;
+		R=ToeplitzMatrix[Drop[r,-1]]; 
+		a=Reverse[LinearSolve[R,Drop[r,1]]];
+		Do[xnew=Append[xnew, a.Take[xnew,-p]],{k,1,n}];
+	xnew
 ];
 
 
@@ -185,7 +204,7 @@ Covariance2D[FID[q_],OptionsPattern[{SI2->1024,Phase2->0,LeftShift->67}]] :=
 	sfa = sf2 ;
 
 	(* Covariance Matrix *)
-	covm = Transpose[sfa].sfa - Transpose[{Total[sfa,{1}]}]. {Total[sfa,{1}]};
+	covm = Transpose[sfa].sfa -  Transpose[{Total[sfa,{1}]}]. {Total[sfa,{1}]};
 
 	qnew[spectrum]=MatrixPower[covm,1/2];
 	qnew[SpectSize]={OptionValue[SI2],OptionValue[SI2]};
@@ -203,14 +222,24 @@ CovHSQCTOCSY[FID[q_]] :=
 		sfa=Transpose[q[spectrum]];
 
 		(* Covariance Matrix *)
-		covm = Transpose[sfa].sfa - Transpose[{Total[sfa,{1}]}]. {Total[sfa,{1}]};
+		covm = Transpose[sfa].sfa - 0. Transpose[{Total[sfa,{1}]}]. {Total[sfa,{1}]};
 
-		qnew[spectrum]=covm;
-		qnew[SpectSize]=Dimensions[q[spectrum]];
-		qnew[SpectralWidth]=q[SpectralWidth][[2]]{1,1};		
+		qnew[spectrum]=MatrixPower[covm,1/2];
+		qnew[SpectSize]=Dimensions[qnew[spectrum]];
+		qnew[SpectralWidth]=q[SpectralWidth][[2]]{1,1};	
+		qnew[Offset] =	q[Offset][[2]]{1,1};
 
 	FID[qnew]
 ]
+
+
+LinearPredict[FID[q_],ext_]:=
+	Module[{qnew=q,sfa},
+	  sfa=q[data] ;
+	  
+	FID[q]
+] ;
+
 
 
 (* frq is a List of coordinates. First dimension is that of the data set (1D,2D,3D, etc).
@@ -248,7 +277,7 @@ ExtractRow[FID[q_],s_Real]:=
 
 		If[Abs[spt]>=q[SpectSize][[2]]/2, Throw["ExtractRow::Out of range."]];
 		
-		indx=q[SpectSize][[2]]/2-Floor[spt]; 
+		indx=Floor[q[SpectSize][[2]]/2]-Floor[spt]; 
 		a=spt-Floor[spt];	
 			
 		qnew[spectrum] =  (1-a)q[spectrum][[indx-1]] + a  q[spectrum][[indx]] ;
@@ -274,9 +303,9 @@ ExtractColumn[FID[q_],s_Real]:=
 
 		spt = q[SpectSize][[1]]*(s-q[Offset][[1]])/q[SpectralWidth][[1]] ;
 
-		If[Abs[spt]>=q[SpectSize][[1]]/2, Throw["ExtractColumn::Out of range."]];
+		If[Abs[spt]>q[SpectSize][[1]]/2, Throw["ExtractColumn::Out of range."]];
 		
-		indx=q[SpectSize][[1]]/2-Floor[spt]; 
+		indx=Floor[q[SpectSize][[1]]/2]-Floor[spt]; 
 		a=spt-Floor[spt];	
 			
 		qnew[spectrum] =  (1-a)q[spectrum][[;;,indx-1]] + a  q[spectrum][[;;,indx]] ;
