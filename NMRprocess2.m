@@ -394,7 +394,7 @@ NMRContourPlot[FID[q_],opt:OptionsPattern[Join[Options[ListContourPlot],{Gain->1
 			DataRange->-q[SpectralWidth] {{-1/2,1/2},{-1/2,1/2}} - q[Offset] ,
 			Evaluate@FilterRules[{opt},Options[ListContourPlot]],
 			PlotRange -> Join[-q[SpectralWidth] {{-1/2,1/2},{-1/2,1/2}} - q[Offset],{All}] ,
-			Contours-> 1./OptionValue[Gain] Max[q[spectrum]] Range[0.1,0.9,0.1],
+			Contours-> 1./OptionValue[Gain] Max[q[spectrum]] Exp[Range[-2,0,0.2]],
 			ContourShading->None,
 			MaxPlotPoints->Automatic,
 			PerformanceGoal->"Precision",
