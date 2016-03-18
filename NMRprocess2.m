@@ -21,7 +21,7 @@
 
 BeginPackage["NMRProcess2`"];
 
-NMRprocess::VersionNumber="2.0.0 " <> DateString[FileDate["NMRProcess2.m"]];
+NMRprocess::VersionNumber="2.0.0 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
 
 Print["NMR Processing
 Version ", NMRprocess::VersionNumber, "
@@ -327,7 +327,7 @@ Crop[FID[q_],r_] :=
 
 	(* Translate range into indices *)
 			
-	indx = Indx[q,r];
+	indx = Indx[q,r]; 
 
 	(* Select corresponding part of spectral data *)
 	
