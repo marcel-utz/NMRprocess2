@@ -357,6 +357,17 @@ Crop[FID[q_],r_] :=
 	
 
 
+TrimTimeDomain[FID[q_],TDeff_List] :=
+	Module[{qnew=q,droplist},
+
+	If[q[Dim] != Length[TDeff], Throw["TrimTimeDomain::Dimension mismatch"]];
+
+	qnew[data]=Take[q[data],Reverse[TDeff]/.List->Sequence];
+	FID[qnew]
+];
+	
+
+
 PlotNMR1D[FID[q_],opt:OptionsPattern[Options[ListLinePlot]]]:=
 	Module[{d,max,min},
 
