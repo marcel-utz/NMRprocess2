@@ -233,10 +233,19 @@ CovHSQCTOCSY[FID[q_]] :=
 ]
 
 
-LinearPredict[FID[q_],ext_]:=
-	Module[{qnew=q,sfa},
+LinearPredict[FID[q_],ext_Integer,dim_Integer,p_Integer]:=
+	Module[{qnew=q,sfa,dims},
 	  sfa=q[data] ;
-	  
+	  dims=Dimensions[q[data]];
+	  	
+	  (* Transpose data to bring desired dimension *) 
+		(* compute transpose level list *)
+		
+
+	  (* loop over traces and extend them by linear prediction *)
+
+	  (* Reformat data to original shape *)
+
 	FID[q]
 ] ;
 
