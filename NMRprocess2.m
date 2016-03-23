@@ -58,6 +58,81 @@ AddRaw[FID[q1_],FID[q2_]] :=
 	
 
 
+ReadVarian[fname_] := Module[
+						  {nblocks, ntraces, np, ebytes, tbytes, bbytes, versId, status, 
+							  nbheaders, sdata, sspec, s32, sfloat, scomplex, shyper, re, im,
+							  scale, bstatus, index, mode, ctcount, lpval, rpval, lvl, tlt, b, t,
+							  datatype},
+						  
+						  (* Read Header Information *)
+						  
+						  nblocks = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  ntraces = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  np = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  ebytes = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  tbytes = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  bbytes = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  versId = BinaryRead[fname, "Integer16", ByteOrdering -> 1];
+						  status = BinaryRead[fname, "Integer16", ByteOrdering -> 1];
+						  nbheaders = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+						  sdata = BitGet[status, 0] == 1;
+						  sspec = BitGet[status, 1] == 1;
+						  s32 = BitGet[status, 2] == 1;
+						  sfloat = BitGet[status, 3] == 1;
+						  scomplex = BitGet[status, 4] == 1;
+						  shyper = BitGet[status, 5] == 1;
+						  
+						  datatype = "Integer16";
+						  If[s32, datatype = "Integer32"];
+						  If[sfloat, datatype = "Real32"];
+						  
+						  Print["Reading ",nblocks, " blocks of ", np/2, " complex points; data type: ", datatype];
+						  (* Print[datatype]; *)
+						  (* Read Blocks *)
+						  
+						  re = {} ;
+						  Do[
+							 (* Print["Reading block ",b]; *)
+							 
+							 (* Read block header *)
+							 
+							 scale = BinaryRead[fname, "Integer16", ByteOrdering -> 1];
+							 bstatus = BinaryRead[fname, "Integer16", ByteOrdering -> 1];
+							 index = BinaryRead[fname, "Integer16", ByteOrdering -> 1];
+							 mode = BinaryRead[fname, "Integer16", ByteOrdering -> 1];
+							 ctcount = BinaryRead[fname, "Integer32", ByteOrdering -> 1];
+							 lpval = BinaryRead[fname, "Real32", ByteOrdering -> 1];
+							 rpval = BinaryRead[fname, "Real32", ByteOrdering -> 1];
+							 lvl = BinaryRead[fname, "Real32", ByteOrdering -> 1];
+							 tlt = BinaryRead[fname, "Real32", ByteOrdering -> 1];
+							 
+							 Do[
+								data = 
+								Table[BinaryRead[fname, datatype, ByteOrdering -> 1], {k, 1, 
+								 np}];
+								
+								(* Note: minus sign in the following expression leads to spectra plotted in the conventional NMR 
+								   order (chemical shift and frequency increase to the left). If the other convention is desired, 
+								   use the complex conjugate of the data. *)
+								
+								re = Join[re, {data[[1 ;; ;; 2]] + I data [[2 ;; ;; 2]]}];
+								
+								, {t, 1, ntraces}];
+							 
+							 ,
+							 {b, 1, nblocks}] ;
+						  
+						  Close[fname];
+						  {nblocks, ntraces, np, ebytes, tbytes, bbytes, versId, status, 
+							  nbheaders, sdata} ;
+
+						FID[<|Dim->1,data->Flatten[re],Points->nblocks*np/2|>]
+						  
+		];
+
+
+
+
 SetTimeDomain[FID[q_],TD_List]:= 
 	Module[{qnew=q},
 		qnew[Dim]=Length[TD];
@@ -173,12 +248,12 @@ StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftS
 	apod2=PadRight[Table[0.5+0.5 Cos[\[Pi] k / m],{k,1,m}],si2]; 
 	(* sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],Regions\[Rule]32],{fid,ser}];*)
 	sf2=Table[Reverse@FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],{fid,ser}];
-	sfa = Transpose[sf2[[1;; ;;2]] - I sf2[[2;; ;;2]]] ;
+	sfa = Transpose[sf2[[1;; ;;2]] + I sf2[[2;; ;;2]]] ;
 	
 	sfa[[;;,1]]*=0.5;
 	
 	apod1= PadRight[Table[0.5+0.5 Cos[2 \[Pi] k / n],{k,1,n/2}],si1]; 
-	sfb = Table[Reverse@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}];
+	sfb = Table[Reverse@FourierShift@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}];
 
 	qnew[spectrum]=Transpose[sfb];
 	qnew[SpectSize]={OptionValue[SI2],OptionValue[SI1]};
