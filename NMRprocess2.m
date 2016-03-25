@@ -237,7 +237,7 @@ FFT1D[FID[q_],OptionsPattern[{SI->1024,Phase0->Automatic,Phase1->0,Pivot->0,Left
 
 
 
-StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftShift->67}]] := Module[
+StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftShift->67,T1Dir->1,T1Shift->False}]] := Module[
 	{qnew=q,
 		sf2,sfa,sfb,si2=OptionValue[SI2],si1=OptionValue[SI1],
 		p2=\[Pi] OptionValue[Phase2]/180,p1=\[Pi] OptionValue[Phase1]/180,
@@ -246,14 +246,17 @@ StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftS
 	{n,m}=Dimensions[ser];
 	ser[[;;,1]] *= 0.5;
 	apod2=PadRight[Table[0.5+0.5 Cos[\[Pi] k / m],{k,1,m}],si2]; 
-	(* sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],Regions\[Rule]32],{fid,ser}];*)
-	sf2=Table[Reverse@FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],{fid,ser}];
-	sfa = Transpose[sf2[[1;; ;;2]] + I sf2[[2;; ;;2]]] ;
+    sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],Regions->32],{fid,ser}];
+	(* sf2=Table[Reverse@FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],{fid,ser}]; *)
+	sfa = Transpose[sf2[[1;; ;;2]] - OptionValue[T1Dir] I sf2[[2;; ;;2]]] ;
 	
-	sfa[[;;,1]]*=0.5;
+	sfa[[;;,1]]*=0.5;  
 	
 	apod1= PadRight[Table[0.5+0.5 Cos[2 \[Pi] k / n],{k,1,n/2}],si1]; 
-	sfb = Table[Reverse@FourierShift@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}];
+	sfb = If[OptionValue[T1Shift]==True,
+				Table[Reverse@FourierShift@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}],
+				Table[Reverse@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}]
+			] ;
 
 	qnew[spectrum]=Transpose[sfb];
 	qnew[SpectSize]={OptionValue[SI2],OptionValue[SI1]};
