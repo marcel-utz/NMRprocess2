@@ -124,17 +124,6 @@ OptionValue[Output][[1]]s+OptionValue[Output][[2]] f[Range[1,n]]
 
 
 
-LinPred[x_,p_,n_]:= 
-	Module[{l=Length[x],a,R,r,xnew=x,k},
-		r=Take[ListCorrelate[x,Conjugate[x],{1,1},0],p+1]/l;
-		R=ToeplitzMatrix[Drop[r,-1]]; 
-		a=Reverse[LinearSolve[R,Drop[r,1]]];
-		Do[xnew=Append[xnew, a.Take[xnew,-p]],{k,1,n}];
-	xnew
-];
-
-
-
 FFT1D[FID[q_],OptionsPattern[{SI->1024,Phase0->Automatic,Phase1->0,Pivot->0,LeftShift->67,Apod->0.5}]]:= Module[
 	{qnew=q,fid=q[data],apod,n,sf,pc1,pivot,si=OptionValue[SI],ls=OptionValue[LeftShift],p0=0,p1=0},
 
@@ -177,8 +166,8 @@ StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftS
 	
 	sfa[[;;,1]]*=0.5;
 	
-	apod1= PadRight[Table[0.5+0.5 Cos[2 \[Pi] k / n],{k,1,n/2}],si1]; 
-	sfb = Table[Reverse@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}];
+	apod1= PadRight[Table[0.5+0.5 Cos[\[Pi] k / n],{k,1,n}],si1]; 
+	sfb = Table[Reverse@Re[Fourier[apod1*PadRight[LinPred[fid,10,n/2],si1]] Exp[I p1]],{fid,sfa}];
 
 	qnew[spectrum]=Transpose[sfb];
 	qnew[SpectSize]={OptionValue[SI2],OptionValue[SI1]};
@@ -233,21 +222,46 @@ CovHSQCTOCSY[FID[q_]] :=
 ]
 
 
-LinearPredict[FID[q_],ext_Integer,dim_Integer,p_Integer]:=
-	Module[{qnew=q,sfa,dims},
+LinPred[x_,p_,n_]:= 
+	Module[{l=Length[x],a,R,r,xnew=x,k},
+		r=Take[ListCorrelate[x,Conjugate[x],{1,1},0],p+1]/l;
+		R=ToeplitzMatrix[Drop[r,-1]]; 
+		a=Reverse[LinearSolve[R,Drop[r,1]]];
+		Do[xnew=Append[xnew, a.Take[xnew,-p]],{k,1,n}];
+	xnew
+];
+
+
+
+LinearPredict[FID[q_],p_Integer,OptionsPattern[{Points->Automatic}]]:=
+	Module[{qnew=q,sfa,dims,LPF,directlevel,np},
 	  sfa=q[data] ;
-	  dims=Dimensions[q[data]];
-	  	
-	  (* Transpose data to bring desired dimension *) 
-		(* compute transpose level list *)
-		
+	  dims=Dimensions[q[data]];		
+	  directlevel=Length[dims]-1;
 
-	  (* loop over traces and extend them by linear prediction *)
+	  If[OptionValue[Points]==Automatic,
+			np= dims[[-1]],
+			np= OptionValue[Points]
+	  ];
+	 Print[np];
+	  LPF=LinPred[#1,p,np]& ;
 
-	  (* Reformat data to original shape *)
+	  qnew[data] = Map[LPF,q[data],{directlevel}] ;	
+	  qnew[Points]=Reverse[Dimensions[qnew[data]]] ;  
 
-	FID[q]
+	FID[qnew]
 ] ;
+
+
+
+Transpose2D[FID[q_]]:= 
+	Module[{qnew=q},
+		If[q[Dim]!=2, Throw["ExtractRow::Not 2D data"]];
+		qnew[data]=Transpose[q[data]];
+		qnew[Points]=Reverse@Dimensions[qnew[data]] ;
+
+	FID[qnew]
+];
 
 
 
