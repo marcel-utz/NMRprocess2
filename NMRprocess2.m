@@ -21,7 +21,7 @@
 
 BeginPackage["NMRProcess2`"];
 
-NMRprocess::VersionNumber="2.0.0 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
+NMRprocess::VersionNumber="2.0.1 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
 
 Print["NMR Processing
 Version ", NMRprocess::VersionNumber, "
@@ -171,7 +171,7 @@ ExtractTransient[FID[q_], n_List]:=Module[
 FourierShift[data_?ListQ]:=
 	Module[ {l},
 		l=Length[data];
-		Join[Take[data,-Floor[l/2]+1],Take[data,Floor[l/2]]]
+		Join[Take[data,-Floor[l/2]],Take[data,Floor[l/2]]]
 	]
 
 
@@ -216,7 +216,7 @@ FFT1D[FID[q_],OptionsPattern[{SI->1024,Phase0->Automatic,Phase1->0,Pivot->0,Left
 	apod=Table[Exp[-OptionValue[Apod]\[Pi] k / si],{k,1,si}]; 
 	pc1=Table[Exp[I p1 (k-pivot)/si],{k,1,si}];
 
-	sf = Reverse@BaseLineCorrect[FourierShift@Re[pc1*Fourier[apod*PadRight[Drop[fid,ls],si]] Exp[I p0]],Regions->32];
+	sf = Reverse[Re[pc1*FourierShift[Fourier[apod*PadRight[Drop[fid,ls],si]] Exp[I p0]]]];
 	qnew[spectrum]=sf;
 	qnew[SpectSize]=si;
 
