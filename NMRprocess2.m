@@ -19,13 +19,14 @@
 
 
 
+(* ::Code::Initialization:: *)
 BeginPackage["NMRProcess2`"];
 
-NMRprocess::VersionNumber="2.0.1 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
+NMRprocess::VersionNumber="0.2.2 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
 
 Print["NMR Processing
 Version ", NMRprocess::VersionNumber, "
-(c)2016 Marcel Utz
+(c)2017 Marcel Utz
 marcel.utz@southampton.ac.uk"];
 
 
@@ -234,14 +235,14 @@ StatesFFT2[FID[q_],OptionsPattern[{SI1->1024,SI2->1024,Phase1->0,Phase2->0,LeftS
 
 	{n,m}=Dimensions[ser];
 	ser[[;;,1]] *= 1;
-	apod2=PadRight[Table[0.5+0.5 Cos[\[Pi] k / m],{k,1,m}],si2]; 
+	apod2=PadRight[Table[0.5+0.5 Cos[\[Pi] k / (m)],{k,1,m}],si2]; 
     sf2=Table[Reverse@BaseLineCorrect[FourierShift@Re[Fourier[apod2*PadRight[RotateLeft[fid,ls],si2]] Exp[I p2]],Regions->32],{fid,ser}];
 	(* sf2=Table[Reverse@FourierShift@Re[Fourier[apod2*PadRight[Drop[fid,ls],si2]] Exp[I p2]],{fid,ser}]; *)
 	sfa = Transpose[sf2[[1;; ;;2]] - OptionValue[T1Dir] I sf2[[2;; ;;2]]] ;
 	
 	sfa[[;;,1]]*=0.5;  
 	
-	apod1= PadRight[Table[0.5+0.5 Cos[\[Pi] k / n],{k,1,n}],si1]; 
+	apod1= PadRight[Table[0.5+0.5 Cos[\[Pi] k / si1],{k,1,n}],si1]; 
 	sfb = If[OptionValue[T1Shift]==True,
 				Table[Reverse@FourierShift@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}],
 				Table[Reverse@Re[Fourier[apod1*PadRight[fid,si1]] Exp[I p1]],{fid,sfa}]
@@ -302,9 +303,9 @@ CovHSQCTOCSY[FID[q_]] :=
 
 LinPred[x_,p_,n_]:= 
 	Module[{l=Length[x],a,R,r,xnew=x,k},
-		r=Take[ListCorrelate[x,Conjugate[x],{1,1},0],p+1]/l;
+		r=Take[ListCorrelate[x,Conjugate[x],{1,1},0],p+1];
 		R=ToeplitzMatrix[Drop[r,-1]]; 
-		a=Reverse[LinearSolve[R,Drop[r,1]]];
+		a=Reverse[LeastSquares[R,Drop[r,1]]];
 		Do[xnew=Append[xnew, a.Take[xnew,-p]],{k,1,n}];
 	xnew
 ];
@@ -334,7 +335,7 @@ LinearPredict[FID[q_],p_Integer,OptionsPattern[{Points->Automatic}]]:=
 
 Transpose2D[FID[q_]]:= 
 	Module[{qnew=q},
-		If[q[Dim]!=2, Throw["ExtractRow::Not 2D data"]];
+		If[q[Dim]!=2, Throw["Transpose2D::Not 2D data"]];
 		qnew[data]=Transpose[q[data]];
 		qnew[Points]=Reverse@Dimensions[qnew[data]] ;
 
@@ -454,7 +455,9 @@ Crop[FID[q_],r_] :=
 	(* Done *)
 
 	FID[qnew]
-]
+];
+
+
 	
 
 
@@ -559,4 +562,5 @@ NMRContourProjectionPlot[FID[q_],opt:OptionsPattern[Join[Options[ListContourPlot
 ]
 
 
+(* ::Input::Initialization:: *)
 EndPackage[]
