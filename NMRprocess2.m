@@ -19,10 +19,9 @@
 
 
 
-(* ::Code::Initialization:: *)
 BeginPackage["NMRProcess2`"];
 
-NMRprocess::VersionNumber="0.2.2 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
+NMRprocess::VersionNumber="0.2.3 " <> DateString[FileDate[FindFile["NMRProcess2.m"]]];
 
 Print["NMR Processing
 Version ", NMRprocess::VersionNumber, "
@@ -472,6 +471,17 @@ TrimTimeDomain[FID[q_],TDeff_List] :=
 	
 
 
+RollSpectrum[FID[q_],Pts_List] :=
+	Module[{qnew=q,droplist},
+
+	If[q[Dim] != Length[Pts], Throw["RollSpectrum::Dimension mismatch"]];
+
+	qnew[spectrum]=RotateLeft[q[spectrum],Reverse[Pts]];
+	FID[qnew]
+];
+	
+
+
 PlotNMR1D[FID[q_],opt:OptionsPattern[Options[ListLinePlot]]]:=
 	Module[{d,max,min},
 
@@ -562,5 +572,4 @@ NMRContourProjectionPlot[FID[q_],opt:OptionsPattern[Join[Options[ListContourPlot
 ]
 
 
-(* ::Input::Initialization:: *)
 EndPackage[]
